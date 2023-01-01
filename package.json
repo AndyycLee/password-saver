@@ -1,0 +1,43 @@
+{
+  "name": "leetcode-trainerv2",
+  "displayName": "Leetcode trainerv2",
+  "version": "0.0.0",
+  "description": "Showcasing how easy it is to have auth with Plasmo.",
+  "author": "calga",
+  "scripts": {
+    "dev": "plasmo dev",
+    "build": "plasmo build",
+    "package": "plasmo package"
+  },
+  "dependencies": {
+    "firebase": "9.15.0",
+    "plasmo": "0.61.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.0.206",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "prettier": "2.8.1",
+    "typescript": "4.9.4",
+    "@plasmohq/prettier-plugin-sort-imports": "3.6.1"
+  },
+  "manifest": {
+    "key": "$CRX_PUBLIC_KEY",
+    "host_permissions": [
+      "https://*/*"
+    ],
+    "permissions": [
+      "identity"
+    ],
+    "oauth2": {
+      "client_id": "$PLASMO_PUBLIC_FIREBASE_CLIENT_ID",
+      "scopes": [
+        "https://www.googleapis.com/auth/userinfo.email",
+        "https://www.googleapis.com/auth/userinfo.profile"
+      ]
+    }
+  }
+}
