@@ -8,7 +8,13 @@ import {
 } from "firebase/auth"
 import { useEffect, useState } from "react"
 
+// @ts-ignore
+import leetcode_logo from "./assets/leetcode_logo.png"
 import { auth } from "./firebase"
+
+import "./popup.css"
+import ImageLink from "./components/leetcode_logo"
+import Button from "./interesting_button"
 
 setPersistence(auth, browserLocalPersistence)
 
@@ -22,6 +28,10 @@ function IndexPopup() {
     }
   }
 
+  // When the user clicks log in, we need to ask Chrome
+  // to log them in, get their Google auth token,
+  // send it to Firebase, and let Firebase do its magic
+  // if everything worked, we'll get a user object from them
   const onLoginClicked = () => {
     chrome.identity.getAuthToken({ interactive: true }, async function (token) {
       if (chrome.runtime.lastError || !token) {
@@ -49,37 +59,52 @@ function IndexPopup() {
 
   return (
     <div
+      className="App"
       style={{
         display: "flex",
         flexDirection: "column",
         padding: 16
       }}>
+           <ImageLink />
+
       <h1>
-        Welcome to your <a href="https://www.plasmo.com">Plasmo</a> Extension!
+        Enjoy your{" "}
+        <a
+          className="App-link"
+          href="https://leetcode.com/"
+          target="_blank"
+          rel="noopener noreferrer">
+            <span className="orange">LeetCode</span>
+
+          
+        </a>{" "}
+        training!
       </h1>
       {!user ? (
-        <button
+        <Button
+          secondary
           onClick={() => {
             setIsLoading(true)
             onLoginClicked()
           }}>
-          Log in
-        </button>
+          Google Log in
+        </Button>
       ) : (
-        <button
+        <Button
+          secondary
           onClick={() => {
             setIsLoading(true)
             onLogoutClicked()
           }}>
           Log out
-        </button>
+        </Button>
       )}
       <div>
         {isLoading ? "Loading..." : ""}
         {!!user ? (
-          <div>
-            Welcome to Plasmo, {user.displayName} your email address is{" "}
-            {user.email}
+          <div className="display-details">
+            Welcome to Leetcode Trainer, {user.displayName} your email address
+            is {user.email}
           </div>
         ) : (
           ""

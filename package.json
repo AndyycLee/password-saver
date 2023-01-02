@@ -2,7 +2,7 @@
   "name": "leetcode-trainerv2",
   "displayName": "Leetcode trainerv2",
   "version": "0.0.0",
-  "description": "Showcasing how easy it is to have auth with Plasmo.",
+  "description": "Showcasing how easy it is to have auth with Plasmo. Leetcode trainerv2",
   "author": "calga",
   "scripts": {
     "dev": "plasmo dev",
