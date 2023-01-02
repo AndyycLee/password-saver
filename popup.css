@@ -27,3 +27,6 @@ body {
     text-decoration: underline;
     text-decoration-color: orange;
 }
+.App-link {
+  color: black;
+}

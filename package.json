@@ -28,7 +28,8 @@
     "key": "$CRX_PUBLIC_KEY",
     "host_permissions": [
       "https://*/*"
-    ],
+    ], 
+    
     "permissions": [
       "identity"
     ],
