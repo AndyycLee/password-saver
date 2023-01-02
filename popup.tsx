@@ -8,8 +8,6 @@ import {
 } from "firebase/auth"
 import { useEffect, useState } from "react"
 
-// @ts-ignore
-import leetcode_logo from "./assets/leetcode_logo.png"
 import { auth } from "./firebase"
 
 import "./popup.css"
@@ -93,7 +91,7 @@ function IndexPopup() {
         {isLoading ? "Loading..." : ""}
         {!!user ? (
           <div className="display-details">
-            Welcome to Leetcode Trainer, {user.displayName} your email address
+            Welcome to Leetcode Trainer, {user.displayName}. Your email address
             is {user.email}
           </div>
         ) : (
