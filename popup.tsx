@@ -13,8 +13,10 @@ import leetcode_logo from "./assets/leetcode_logo.png"
 import { auth } from "./firebase"
 
 import "./popup.css"
+
+import BodyText from "./components/body_text"
+import Button from "./components/interesting_button"
 import ImageLink from "./components/leetcode_logo"
-import Button from "./interesting_button"
 
 setPersistence(auth, browserLocalPersistence)
 
@@ -65,21 +67,9 @@ function IndexPopup() {
         flexDirection: "column",
         padding: 16
       }}>
-           <ImageLink />
+      <ImageLink />
 
-      <h1>
-        Enjoy your{" "}
-        <a
-          className="App-link"
-          href="https://leetcode.com/"
-          target="_blank"
-          rel="noopener noreferrer">
-            <span className="orange">LeetCode</span>
-
-          
-        </a>{" "}
-        training!
-      </h1>
+      <BodyText />
       {!user ? (
         <Button
           secondary

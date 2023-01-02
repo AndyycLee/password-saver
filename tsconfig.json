@@ -1,7 +1,12 @@
 {
   "extends": "plasmo/templates/tsconfig.base",
   "exclude": ["node_modules"],
-  "include": ["./**/*.ts", "./**/*.tsx", "interesting_button.tsx", "components/leetcode_logo.tsx"],
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "components/interesting_button.tsx",
+    "components/leetcode_logo.tsx"
+  ],
   "compilerOptions": {
     "paths": {
       "~*": ["./*"]
