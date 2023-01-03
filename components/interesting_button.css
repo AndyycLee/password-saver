@@ -7,7 +7,6 @@
 .dir-control {
   --borderWidth: 2;
 
-  
   --backdrop: peachpuff;
   --fontSize: 1;
   --horizontalPadding: 16;
@@ -15,7 +14,7 @@
   background: var(--backdrop);
   border: calc(var(--borderWidth) * 1px) solid var(--buttonColor);
   border-radius: 9999px;
-  text-align: center;
+
   line-height: 24px;
   color: var(--textColor, var(--buttonColor));
   cursor: pointer;
@@ -23,12 +22,14 @@
   font-weight: bold;
 
   outline: transparent;
-  padding: calc(var(--verticalPadding) * 1px) calc(var(--horizontalPadding) * 1px);
+  padding: calc(var(--verticalPadding) * 1px)
+    calc(var(--horizontalPadding) * 1px);
   position: relative;
   text-decoration: none;
   height: 60px;
   display: flex;
   align-items: center;
+  /**/
   justify-content: center;
   width: 300px;
   transition: transform 0.2s;
@@ -37,10 +38,13 @@
 .dir-control:hover {
   --y: -5;
   --scale: 1.05;
+
+  transform: translate(0, calc(var(--y, 0) * 1%)) scale(var(--scale, 1));
 }
 .dir-control:active {
   --y: 0;
   --scale: 0.95;
+  transform: translate(0, calc(var(--y, 0) * 1%)) scale(var(--scale, 1));
 }
 .dir-control span {
   -webkit-clip-path: var(--clip);
@@ -113,9 +117,16 @@
 .dir-control--secondary {
   --buttonColor: orange;
   --bg: #ffffff;
-  color:#0d0d0d;
+  color: #0d0d0d;
   font-size: large;
   width: 200px;
-    height: 50px;
+  height: 50px;
+}
+.google-img {
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  margin-right: 10px;
 
+  z-index: 1;
 }

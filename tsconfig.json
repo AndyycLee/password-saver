@@ -5,7 +5,8 @@
     "./**/*.ts",
     "./**/*.tsx",
     "components/interesting_button.tsx",
-    "components/leetcode_logo.tsx"
+    "components/leetcode_logo.tsx",
+    "firebase_components/firebase_post.tsx"
   ],
   "compilerOptions": {
     "paths": {
