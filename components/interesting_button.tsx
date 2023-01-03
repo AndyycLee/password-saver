@@ -49,6 +49,11 @@ Button.defaultProps = {
 }
 
 export default Button
+//Lots of inspiration taken from the person below
+//Copyright (c) 2021 by Jhey (https://codepen.io/jh3y/pen/XWMobqx)
+
+//Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
 //        {/* <img src={googleLogo} alt="google-logo" className="google-img" style={{ transform: 'translate(0, calc(var(--y, 0) * 1%)) scale(var(--scale, 1))' }} /> */}
 
 // const Button = ({ as, children, filled, secondary, ...rest }) => {
