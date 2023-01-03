@@ -15,6 +15,9 @@ import "./popup.css"
 import BodyText from "./components/body_text"
 import Button from "./components/interesting_button"
 import ImageLink from "./components/leetcode_logo"
+// @ts-ignore
+import googleLogo from "./assets/google-login.svg"
+
 
 setPersistence(auth, browserLocalPersistence)
 
@@ -75,7 +78,8 @@ function IndexPopup() {
             setIsLoading(true)
             onLoginClicked()
           }}>
-          Google Log in
+<img src={googleLogo} alt="google-logo" className="google-img" />
+             Google Log in
         </Button>
       ) : (
         <Button
@@ -83,7 +87,8 @@ function IndexPopup() {
           onClick={() => {
             setIsLoading(true)
             onLogoutClicked()
-          }}>
+          }}>                   
+<img src={googleLogo} alt="google-logo" className="google-img" />
           Log out
         </Button>
       )}

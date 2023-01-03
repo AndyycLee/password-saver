@@ -30,3 +30,11 @@ body {
 .App-link {
   color: black;
 }
+
+.google-img {
+  max-width: 100px;
+  height: 10px;
+  margin: 0;
+  /* margin: 0 auto; */
+  
+}
