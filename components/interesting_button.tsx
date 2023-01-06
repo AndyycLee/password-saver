@@ -1,4 +1,4 @@
-import "./interesting_button.css"
+import "../components_css/interesting_button.css"
 
 import React from "react"
 

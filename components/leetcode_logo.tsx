@@ -1,5 +1,5 @@
 import React from 'react';
-import "./leetcode_logo_style.css";
+import "../components_css/leetcode_logo_style.css";
 // @ts-ignore
 import leetcode_logo from '../assets/leetcode_logo.png';
 
