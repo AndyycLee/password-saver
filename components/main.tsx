@@ -8,6 +8,7 @@ import {
 } from "firebase/auth"
 import { useEffect, useState } from "react"
 
+// import { getCurrentTab } from "../background"
 import { auth } from "../firebase"
 
 import "../popup.css"
@@ -22,9 +23,9 @@ import googleLogo from "../assets/google-login.svg"
 // @ts-ignore
 import kofi_img from "../assets/kofi_logo.webp"
 import BodyText from "./body_text"
-import Content_leetcode from "./url_leetcode"
 import Button from "./interesting_button"
 import ImageLink from "./leetcode_logo"
+import Content_leetcode from "./url_leetcode"
 
 setPersistence(auth, browserLocalPersistence)
 
@@ -76,21 +77,7 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
       }
     })
   }
-  const button = document.getElementById("my-button")
 
-  async function getCurrentTab() {
-    let queryOptions = { active: true, lastFocusedWindow: true }
-    // `tab` will either be a `tabs.Tab` instance or `undefined`.
-    let [tab] = await chrome.tabs.query(queryOptions)
-    return tab
-  }
-
-  if (button) {
-    button.onclick = async () => {
-      const tab = await getCurrentTab()
-      console.log(tab.url)
-    }
-  }
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setIsLoading(false)
@@ -147,7 +134,11 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
       </div>
       <div>
         {" "}
-        <button className="my-button">Get Current Tab URL</button>
+        {/* <button className="my-button">Get Current Tab URL</button> */}
+
+
+                {/* Below breaks code */}
+
         {/* <Content_leetcode /> */}
       </div>
 
