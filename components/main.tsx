@@ -143,7 +143,7 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
       </div>
 
       <div className="justify-content-space">
-        <a href="https://github.com/AndyycLee" target="_blank">
+        <a href="https://github.com/AndyycLee/leetcode-trainerv2" target="_blank">
           <img height="26" src={github_img} alt="Github link" />
         </a>
         <a href="https://ko-fi.com/G2G2HI148" target="_blank">
