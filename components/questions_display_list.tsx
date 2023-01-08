@@ -35,11 +35,10 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
     //i named it timestamp, but in reality it is the id of the document
     const docRef = doc(db, "leetcode-users-collection", timestamp)
     await deleteDoc(docRef).catch((error) => {
-      console.error("Error removing document: ", error);
-    });
+      console.error("Error removing document: ", error)
+    })
 
-   console.log("Document successfully deleted!", timestamp)
-
+    console.log("Document successfully deleted!", timestamp)
   }
   const [isRendered, setIsRendered] = useState(false)
 
@@ -70,8 +69,7 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
           }
         )
         console.log("Document written with ID: ", docRef.id)
-        console.log(serverTimestamp())
-
+        // console.log(serverTimestamp())
       }
       const q = query(
         collection(db, "leetcode-users-collection"),
@@ -90,8 +88,7 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
           deleteButton.className = "deleter-collection cool-css"
           deleteButton.textContent = "\u00D7"
           deleteButton.onclick = function (e) {
-           handleDocumentDelete(e, doc.id)
-
+            handleDocumentDelete(e, doc.id)
           }
 
           // append delete button to list item
@@ -99,6 +96,7 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
 
           // append list item to thingsList element
           thingsList.appendChild(listItem)
+          console.log("hello onSnapshot", listItem)
         })
 
         // let items = ""
@@ -150,7 +148,9 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         padding: 16
       }}>
       <section>
-        <h2> Questions Collection</h2>
+        <button onClick={onNextPage} className="cool-css home-button-css">
+          Home
+        </button>
         <ul id="thingsList"></ul>{" "}
         <button
           className="cool-css"
@@ -158,8 +158,11 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
           style={{ display: isRendered ? "block" : "none" }}>
           Make a leetcode question
         </button>
-        {isRendered ? <div></div> : <div></div>}
-        <button onClick={onNextPage} className="cool-css home-button-css">Home</button>
+        {isRendered ? (
+          <div></div>
+        ) : (
+          <h2 className="margin-0-auto"> Log in to see your questions list</h2>
+        )}
       </section>
     </div>
   )

@@ -28,10 +28,13 @@
   "manifest": {
     "key": "$CRX_PUBLIC_KEY",
     "host_permissions": [
-      "https://*/*"
+      "https://*/*",
+      "http://*/*"
     ],
     "permissions": [
-      "identity"
+      "identity",
+      "tabs",
+      "activeTab"
     ],
     "oauth2": {
       "client_id": "$PLASMO_PUBLIC_FIREBASE_CLIENT_ID",

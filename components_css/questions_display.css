@@ -3,11 +3,13 @@
 *:before {
   box-sizing: border-box;
 }
+.margin-0-auto {
 
-img {
-  max-width: 100px;
-  height: auto;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+
 }
 
 h1 {
@@ -93,6 +95,16 @@ h1 {
   display: flex;
 }
 
+#thingsList li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  display: flex;
+
+  font-size: large;
+}
+
 body {
   background: #3778c2;
 }
@@ -112,7 +124,7 @@ body {
 }
 
 .home-button-css {
-  width: 90px;
+  width: 160px;
   height: 40px;
   margin: 0 auto;
   background-color: #94b69a;
@@ -127,13 +139,13 @@ body {
 
 .deleter-collection {
   margin: 0 0 0 0;
-  width: 20;
-  height: 20;
+  width: 24.26px;
+  height: 20px;
   font-size: medium;
   background-color: #ffe4e1;
   margin: 0;
 padding: 0;
-  position: relative;
+
 
 right:0
 }

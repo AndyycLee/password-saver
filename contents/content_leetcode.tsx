@@ -1,4 +1,5 @@
 import type { PlasmoContentScript } from "plasmo"
+import React from "react"
 
 export {}
 console.log("soth any works proof")
@@ -14,3 +15,5 @@ window.addEventListener("load", () => {
 
   document.body.style.background = "peachpuff"
 })
+
+

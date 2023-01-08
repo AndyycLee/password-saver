@@ -1,9 +1,15 @@
-img {
+.App-logo {
   max-width: 100px;
+
   height: auto;
   margin: 0 auto;
 }
-
+.justify-content-space {
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 h1 {
   font-size: 1.5em;
   font-weight: bold;
