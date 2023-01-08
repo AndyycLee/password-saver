@@ -14,7 +14,7 @@ import {
   
   import { NavigateFunction, useNavigate } from "react-router-dom"
 
-  import Questions_display_list from "~components/questions_display_list"
+  // import Questions_display_list from "~components/questions_display_list"
   
   // @ts-ignore
   import googleLogo from "../assets/google-login.svg"
@@ -91,13 +91,15 @@ import {
             flexDirection: "column",
             padding: 16
           }}>
-          <button onClick={onNextPage}>Questions List</button>
+            
+          <button onClick={onNextPage} className="go-to-button cool-css">Questions List</button>
   
           <ImageLink />
   
           <BodyText />
           {!user ? (
             <Button
+            
               secondary
               onClick={() => {
                 setIsLoading(true)
@@ -136,5 +138,4 @@ import {
   }
   
   export default IndexPopupMain
-
-  
+  // export const { user } = IndexPopupMain

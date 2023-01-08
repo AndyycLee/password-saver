@@ -1,7 +1,10 @@
-import { onAuthStateChanged } from "firebase/auth"
+import { AuthErrorCodes, onAuthStateChanged } from "firebase/auth"
+import { getAuth } from "firebase/auth"
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   onSnapshot,
   orderBy,
   query,
@@ -13,7 +16,10 @@ import { NavigateFunction, useNavigate } from "react-router-dom"
 
 import { auth } from "../firebase"
 import { db } from "../firebase_components/firebase_post"
+
 import "../components_css/questions_display.css"
+
+import Button from "./interesting_button"
 
 const Questions_display_list = ({ globalUserAuthorized }) => {
   const navigation: NavigateFunction = useNavigate()
@@ -24,6 +30,17 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
     console.log("hello we are in the main page")
   }
 
+  const handleDocumentDelete = async (e, timestamp: any) => {
+    e.preventDefault()
+    //i named it timestamp, but in reality it is the id of the document
+    const docRef = doc(db, "leetcode-users-collection", timestamp)
+    await deleteDoc(docRef).catch((error) => {
+      console.error("Error removing document: ", error);
+    });
+
+   console.log("Document successfully deleted!", timestamp)
+
+  }
   const [isRendered, setIsRendered] = useState(false)
 
   //Display the list of questions that is saved in the user database, needs to access the auth state
@@ -46,26 +63,52 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         const docRef = await addDoc(
           collection(db, "leetcode-users-collection"),
           {
-            notes: "test1222",
+            notes: `random num: ${Math.random()}`,
             timestamp: serverTimestamp(),
             uid: user.uid,
             link: "https://leetcode.com/problems/diameter-of-binary-tree/"
           }
         )
         console.log("Document written with ID: ", docRef.id)
+        console.log(serverTimestamp())
+
       }
       const q = query(
         collection(db, "leetcode-users-collection"),
         where("uid", "==", user.uid),
         orderBy("timestamp", "desc")
       )
-
       unsubscribe = onSnapshot(q, (querySnapshot) => {
-        let items = ""
+        thingsList.innerHTML = "" // clear the thingsList element
         querySnapshot.forEach((doc) => {
-          items += `<li>${doc.data().notes}</li>`
+          // create list item element
+          const listItem = document.createElement("li")
+          listItem.textContent = doc.data().notes
+
+          // create delete button element
+          const deleteButton = document.createElement("button")
+          deleteButton.className = "deleter-collection cool-css"
+          deleteButton.textContent = "\u00D7"
+          deleteButton.onclick = function (e) {
+           handleDocumentDelete(e, doc.id)
+
+          }
+
+          // append delete button to list item
+          listItem.appendChild(deleteButton)
+
+          // append list item to thingsList element
+          thingsList.appendChild(listItem)
         })
-        thingsList.innerHTML = items
+
+        // let items = ""
+        // querySnapshot.forEach((doc) => {
+        //   //I want to add a button to delete the question from the list on each question -  docRef.id
+        //   items += `<li>${
+        //     doc.data().notes
+        //   }</li> <button class="deleter-collection" onclick={ (e) =>{return handleDocumentDelete(e,doc.data().timestamp)}} >delete</button>`
+        // })
+        // thingsList.innerHTML = items
       })
     } else {
       // Hide the UI.
@@ -77,9 +120,16 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
     }
   })
   useEffect(() => {
-    setTimeout(() => {
+    const auth = getAuth()
+    const user = auth.currentUser
+
+    // ret()
+    if (user) {
+      console.log("hello we are in the useEffect", user.displayName)
       setIsRendered(true)
-    }, 100)
+    } else {
+      console.log("hello we are in the useEffect with no user")
+    }
   }, [])
   // useEffect(() => {
   //   //if user is not signed in, then we should not render the questions list
@@ -92,19 +142,26 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
   // }, [])
 
   return (
-    <section>
-      <h2>Firestore Questions Collection</h2>
-      <ul id="thingsList"></ul>
-      <button
-        id="createThing"
-        style={{ display: isRendered ? "block" : "none" }}>
-        make a leetcode question
-      </button>
-
-      {isRendered ? <div></div> : <p>Loading...</p>}
-
-      <button onClick={onNextPage}>Home</button>
-    </section>
+    <div
+      className="App questions-display-body"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        padding: 16
+      }}>
+      <section>
+        <h2> Questions Collection</h2>
+        <ul id="thingsList"></ul>{" "}
+        <button
+          className="cool-css"
+          id="createThing"
+          style={{ display: isRendered ? "block" : "none" }}>
+          Make a leetcode question
+        </button>
+        {isRendered ? <div></div> : <div></div>}
+        <button onClick={onNextPage} className="cool-css home-button-css">Home</button>
+      </section>
+    </div>
   )
 }
 

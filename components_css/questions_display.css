@@ -1,40 +1,156 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
 img {
-    max-width: 100px;
-    height: auto;
-    margin: 0 auto;
-  }
-  
-  h1 {
-    font-size: 1.5em;
-    font-weight: bold;
-    text-align: center;
-    padding: 0;
-  }
-  .display-details {
-    text-align: center;
-  }
-  
-  .App {
-    background: #e1f2f7;
-    font-family: "Helvetica", sans-serif;
-    color: rgb(1, 1, 32);
-  }
-  
-  body {
-    background: #3778c2;
-  }
-  .orange {
-      text-decoration: underline;
-      text-decoration-color: orange;
-  }
-  .App-link {
-    color: black;
-  }
-  
-  .google-img {
-    max-width: 100px;
-    height: 10px;
-    margin: 0;
-    /* margin: 0 auto; */
-    
-  }
+  max-width: 100px;
+  height: auto;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  padding: 0;
+}
+.display-details {
+  text-align: center;
+}
+
+.App {
+  background: #e1f2f7;
+  font-family: "Helvetica", sans-serif;
+  color: rgb(1, 1, 32);
+}
+.questions-display-body {
+  min-width: 248px;
+}
+
+.cool-css {
+  font-family: Helvetica, sans-serif;
+  --borderWidth: 2;
+  --backdrop: PowderBlue;
+
+  --horizontalPadding: 16;
+  --verticalPadding: 8;
+  background: var(--backdrop);
+  border: calc(var(--borderWidth) * 1px) solid var(--buttonColor);
+  border-radius: 9999px;
+  line-height: 24px;
+  color: var(--textColor, var(--buttonColor));
+  cursor: pointer;
+  text-decoration: none;
+
+  font-weight: bold;
+  outline: transparent;
+  padding: calc(var(--verticalPadding) * 1px)
+    calc(var(--horizontalPadding) * 1px);
+  position: relative;
+  text-decoration: none;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  transition: transform 0.2s;
+  transform: translate(0, calc(var(--y, 0) * 1%)) scale(var(--scale, 1));
+  font-size: 16px;
+
+  /* Change the size of the button */
+  width: 250px;
+  height: 50px;
+  /* Add a border */
+  border: 2px solid #9478b3;
+  /* Style the button on hover */
+  transition: all 0.2s;
+}
+
+.cool-css:hover {
+  --y: -5;
+  --scale: 1.05;
+  transform: translate(0, calc(var(--y, 0) * 1%)) scale(var(--scale, 1));
+
+  /* Change the background color on hover */
+  background-color: #f5e1ff;
+  /* Scale the button up slightly */
+  transform: scale(1.05);
+}
+
+.cool-css:active {
+  /* Change the background color when the button is being pressed */
+  background-color: PowderBlue;
+  /* Scale the button down slightly */
+  transform: scale(0.95);
+}
+
+#thingsList {
+  padding: 0;
+  margin: 0;
+  margin-left: 4px;
+  display: flex;
+}
+
+body {
+  background: #3778c2;
+}
+.orange {
+  text-decoration: underline;
+  text-decoration-color: orange;
+}
+.App-link {
+  color: black;
+}
+
+.google-img {
+  max-width: 100px;
+  height: 10px;
+  margin: 0;
+  /* margin: 0 auto; */
+}
+
+.home-button-css {
+  width: 90px;
+  height: 40px;
+  margin: 0 auto;
+  background-color: #94b69a;
+  margin-top: 12px;
+  color: black;
+}
+.home-button-css:hover {
+  color: white;
+
+  background-color: #3d7c47;
+}
+
+.deleter-collection {
+  margin: 0 0 0 0;
+  width: 20;
+  height: 20;
+  font-size: medium;
+  background-color: #ffe4e1;
+  margin: 0;
+padding: 0;
+  position: relative;
+
+right:0
+}
+.deleter-collection:hover {
+  background-color: #ffb6c1;
+  transform: none;
+}
+
+.go-to-button {
+  width: 160px;
+  height: 40px;
+  margin: auto;
+  margin-bottom: 12px;
+  color: white;
+  background-color: #4b6777;
+}
+.go-to-button:hover {
+  color: #000;
+  background-color: #4cb69f;
+}
