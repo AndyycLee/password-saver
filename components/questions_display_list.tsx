@@ -19,16 +19,14 @@ import { db } from "../firebase_components/firebase_post"
 
 import "../components_css/questions_display.css"
 
+import type { User } from "firebase/auth"
+
 // import Button from "./interesting_button"
 
 import CreateThing from "./createThing"
-import type { User } from "firebase/auth"
-
 
 const Questions_display_list = ({ globalUserAuthorized }) => {
-
   const [testUser, setTestUser] = useState<User>(null)
-
 
   const navigation: NavigateFunction = useNavigate()
 
@@ -59,10 +57,8 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
   //ret is optional
   let ret = onAuthStateChanged(auth, async (user) => {
     if (user) {
-
-      
       // Show the UI.
-      if ( thingsList) {
+      if (thingsList) {
         createThing.style.display = "block"
         thingsList.style.display = "block"
       }
@@ -136,11 +132,9 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
       console.log("hello we are in the useEffect", curUser.displayName)
       setIsRendered(true)
       setTestUser(curUser)
-
     } else {
       console.log("hello we are in the useEffect with no user")
       setTestUser(null)
-
     }
   }, [])
   // useEffect(() => {
@@ -162,14 +156,11 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         padding: 16
       }}>
       <section>
-
         <button onClick={onNextPage} className="cool-css home-button-css">
           Home
         </button>
         <ul id="thingsList"></ul>{" "}
-
-        <CreateThing isRendered={isRendered} user={testUser} ></CreateThing>
-
+        <CreateThing isRendered={isRendered} user={testUser}></CreateThing>
         {/* <button
           className="cool-css"
           id="createThing"
@@ -179,7 +170,10 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         {isRendered ? (
           <div></div>
         ) : (
-          <h2 className="margin-0-auto"> Log in to see your questions list 😊</h2>
+          <h2 className="margin-0-auto">
+            {" "}
+            Log in to see your questions list 😊
+          </h2>
         )}
       </section>
     </div>
