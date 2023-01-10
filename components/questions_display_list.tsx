@@ -19,9 +19,17 @@ import { db } from "../firebase_components/firebase_post"
 
 import "../components_css/questions_display.css"
 
-import Button from "./interesting_button"
+// import Button from "./interesting_button"
+
+import CreateThing from "./createThing"
+import type { User } from "firebase/auth"
+
 
 const Questions_display_list = ({ globalUserAuthorized }) => {
+
+  const [testUser, setTestUser] = useState<User>(null)
+
+
   const navigation: NavigateFunction = useNavigate()
 
   const onNextPage = (): void => {
@@ -51,26 +59,28 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
   //ret is optional
   let ret = onAuthStateChanged(auth, async (user) => {
     if (user) {
+
+      
       // Show the UI.
-      if (createThing && thingsList) {
+      if ( thingsList) {
         createThing.style.display = "block"
         thingsList.style.display = "block"
       }
 
-      createThing.onclick = async () => {
-        // Add a new document to collection leetcode-users-collection with a generated id.
-        const docRef = await addDoc(
-          collection(db, "leetcode-users-collection"),
-          {
-            notes: `random num: ${Math.random()}`,
-            timestamp: serverTimestamp(),
-            uid: user.uid,
-            link: "https://leetcode.com/problems/diameter-of-binary-tree/"
-          }
-        )
-        console.log("Document written with ID: ", docRef.id)
-        // console.log(serverTimestamp())
-      }
+      // createThing.onclick = async () => {
+      //   // Add a new document to collection leetcode-users-collection with a generated id.
+      //   const docRef = await addDoc(
+      //     collection(db, "leetcode-users-collection"),
+      //     {
+      //       notes: `random num: ${Math.random()}`,
+      //       timestamp: serverTimestamp(),
+      //       uid: user.uid,
+      //       link: "https://leetcode.com/problems/diameter-of-binary-tree/"
+      //     }
+      //   )
+      //   console.log("Document written with ID: ", docRef.id)
+      //   // console.log(serverTimestamp())
+      // }
       const q = query(
         collection(db, "leetcode-users-collection"),
         where("uid", "==", user.uid),
@@ -94,7 +104,7 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
           // append delete button to list item
           listItem.appendChild(deleteButton)
 
-          // append list item to thingsList element
+          // append list item to thingsList element - is this inefficient? or does firebase batch updates?
           thingsList.appendChild(listItem)
           console.log("hello onSnapshot", listItem)
         })
@@ -119,14 +129,18 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
   })
   useEffect(() => {
     const auth = getAuth()
-    const user = auth.currentUser
+    const curUser = auth.currentUser
 
     // ret()
-    if (user) {
-      console.log("hello we are in the useEffect", user.displayName)
+    if (curUser) {
+      console.log("hello we are in the useEffect", curUser.displayName)
       setIsRendered(true)
+      setTestUser(curUser)
+
     } else {
       console.log("hello we are in the useEffect with no user")
+      setTestUser(null)
+
     }
   }, [])
   // useEffect(() => {
@@ -148,20 +162,24 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         padding: 16
       }}>
       <section>
+
         <button onClick={onNextPage} className="cool-css home-button-css">
           Home
         </button>
         <ul id="thingsList"></ul>{" "}
-        <button
+
+        <CreateThing isRendered={isRendered} user={testUser} ></CreateThing>
+
+        {/* <button
           className="cool-css"
           id="createThing"
           style={{ display: isRendered ? "block" : "none" }}>
           Make a leetcode question
-        </button>
+        </button> */}
         {isRendered ? (
           <div></div>
         ) : (
-          <h2 className="margin-0-auto"> Log in to see your questions list</h2>
+          <h2 className="margin-0-auto"> Log in to see your questions list 😊</h2>
         )}
       </section>
     </div>

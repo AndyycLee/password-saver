@@ -1,3 +1,24 @@
 .test {
-    margin: 0 auto;
+    /* margin: 0 auto; */
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+    align-content: center;
+    padding: 0%;
+    margin:0;
+}
+.test :hover {
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  /* Change the cursor to a pointer on hover */
+  cursor: pointer;
+
+  /* Add a transition to the button */
+  transition: 0.5s;
+  /* Specify a gradual transition timing function */
+  transition-timing-function: ease;
 }

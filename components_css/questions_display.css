@@ -5,12 +5,26 @@
 }
 .margin-0-auto {
 
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 0;
+  align-items: center; */
+  margin: 15 0 9 0;  text-align: center;
+  line-height: 1.2;
 
+
+  /* Set the font size to 24px */
+  font-size: 20px;
+  /* Set the font weight to bold */
+  font-weight: bold;
+  /* Set the text color to dark gray */
+color: #000;
+
+  /* Add a text shadow to give the text a subtle 3D effect */
+  /* text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  /* Add some transition effects to make the text change smoothly when hovered */
+  /* transition: text-shadow 0.2s; */ 
 }
+ 
 
 h1 {
   font-size: 1.5em;
@@ -68,6 +82,7 @@ h1 {
   border: 2px solid #9478b3;
   /* Style the button on hover */
   transition: all 0.2s;
+  margin: 0 auto;
 }
 
 .cool-css:hover {
@@ -103,6 +118,9 @@ h1 {
   display: flex;
 
   font-size: large;
+
+
+  justify-content: space-between;/* Add this line to align the items to the left and right */
 }
 
 body {
@@ -145,9 +163,10 @@ body {
   background-color: #ffe4e1;
   margin: 0;
 padding: 0;
+border-radius: 50%;
+margin-left: auto;  /* Add this line to align the delete button to the right */
 
-
-right:0
+/* right:0 */
 }
 .deleter-collection:hover {
   background-color: #ffb6c1;

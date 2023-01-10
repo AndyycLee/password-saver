@@ -17,7 +17,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom"
 
 // import Questions_display_list from "~components/questions_display_list"
 // @ts-ignore
-import github_img from "../assets/github-mark.svg"
+import github_img from "../assets/github-mark.png"
 // @ts-ignore
 import googleLogo from "../assets/google-login.svg"
 // @ts-ignore
@@ -26,6 +26,9 @@ import BodyText from "./body_text"
 import Button from "./interesting_button"
 import ImageLink from "./leetcode_logo"
 import Content_leetcode from "./url_leetcode"
+
+import CreateThing from "./createThing"
+
 
 setPersistence(auth, browserLocalPersistence)
 
@@ -140,11 +143,14 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
                 {/* Below breaks code */}
 
         {/* <Content_leetcode /> */}
+
+
+        <CreateThing isRendered={true} user={user} page={"page1"}></CreateThing>
       </div>
 
       <div className="justify-content-space">
-        <a href="https://github.com/AndyycLee/leetcode-trainerv2" target="_blank">
-          <img height="26" src={github_img} alt="Github link" />
+        <a href="https://github.com/AndyycLee/leetcode-trainerv2" target="_blank"  >
+          <img height="26" src={github_img} alt="Github link"  id="github-img"/>
         </a>
         <a href="https://ko-fi.com/G2G2HI148" target="_blank">
           <img height="36" src={kofi_img} alt="Buy Me a Coffee at ko-fi.com" />

@@ -1,11 +1,14 @@
+
 .App-logo {
   max-width: 100px;
 
   height: auto;
-  margin: 0 auto;
+ padding-top: 6px;
+ padding: 0px;
+
 }
 .justify-content-space {
-  margin-top: 2px;
+  margin-top: 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,8 +33,8 @@ body {
   background: #3778c2;
 }
 .orange {
-    text-decoration: underline;
-    text-decoration-color: orange;
+  text-decoration: underline;
+  text-decoration-color: orange;
 }
 .App-link {
   color: black;
@@ -42,5 +45,22 @@ body {
   height: 10px;
   margin: 0;
   /* margin: 0 auto; */
-  
+}
+.justify-content-space img:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  /* Change the cursor to a pointer on hover */
+  cursor: pointer;
+
+  /* Add a transition to the button */
+  transition: 0.5s;
+  /* Specify a gradual transition timing function */
+  transition-timing-function: ease;
+
+  /* zoom:105%; */
+}
+#github-img {
+  box-sizing: content-box;
+
+  padding: 6px;
 }
