@@ -25,6 +25,8 @@ import type { User } from "firebase/auth"
 
 import CreateThing from "./createThing"
 
+// import Dropdown from "./dropdown"
+
 const Questions_display_list = ({ globalUserAuthorized }) => {
   const [testUser, setTestUser] = useState<User>(null)
 
@@ -87,8 +89,12 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         querySnapshot.forEach((doc) => {
           // create list item element
           const listItem = document.createElement("li")
-          listItem.textContent = doc.data().notes
+          // listItem.setAttribute("class", "my-li-class")
 
+          const listItemLink = document.createElement("a")
+          listItemLink.href = doc.data().link
+          listItemLink.innerHTML = doc.data().notes
+          listItem.appendChild(listItemLink)
           // create delete button element
           const deleteButton = document.createElement("button")
           deleteButton.className = "deleter-collection cool-css"
@@ -176,6 +182,8 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
           </h2>
         )}
       </section>
+
+      {/* <Dropdown></Dropdown> */}
     </div>
   )
 }

@@ -9,7 +9,8 @@
     "./**/*.tsx",
     "components/interesting_button.tsx",
     "components/leetcode_logo.tsx",
-    "firebase_components/firebase_post.tsx"
+    "firebase_components/firebase_post.tsx",
+    "background/messages/ping.ts"
   ],
   "compilerOptions": {
     "paths": {

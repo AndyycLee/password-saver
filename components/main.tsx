@@ -13,6 +13,7 @@ import { auth } from "../firebase"
 
 import "../popup.css"
 
+import { sendToBackground } from "@plasmohq/messaging"
 import { NavigateFunction, useNavigate } from "react-router-dom"
 
 // import Questions_display_list from "~components/questions_display_list"
@@ -23,18 +24,17 @@ import googleLogo from "../assets/google-login.svg"
 // @ts-ignore
 import kofi_img from "../assets/kofi_logo.webp"
 import BodyText from "./body_text"
+import CreateThing from "./createThing"
 import Button from "./interesting_button"
 import ImageLink from "./leetcode_logo"
 import Content_leetcode from "./url_leetcode"
-
-import CreateThing from "./createThing"
-
 
 setPersistence(auth, browserLocalPersistence)
 
 function IndexPopupMain({ setglobalUserAuthorized }) {
   const [isLoading, setIsLoading] = useState(false)
   const [user, setUser] = useState<User>(null)
+  const [websiteUrl, setWebsiteUrl] = useState<any>("")
 
   const onLogoutClicked = async () => {
     if (user) {
@@ -103,8 +103,10 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
 
       <ImageLink />
 
-      <BodyText />
-      {!user ? (
+      <BodyText user={user} />
+      <div style={{display:"flex",alignItems:"center",justifyContent:"center" }}>
+
+{!user ? (
         <Button
           secondary
           onClick={() => {
@@ -125,32 +127,25 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
           Log out
         </Button>
       )}
+</div>
+      
       <div>
         {isLoading ? "Loading..." : ""}
-        {!!user ? (
-          <div className="display-details">
-            Welcome to Leetcode Trainer, {user.displayName}.
-          </div>
-        ) : (
-          ""
-        )}
+        
       </div>
       <div>
         {" "}
         {/* <button className="my-button">Get Current Tab URL</button> */}
-
-
-                {/* Below breaks code */}
-
+        {/* Below breaks code */}
         {/* <Content_leetcode /> */}
-
-
         <CreateThing isRendered={true} user={user} page={"page1"}></CreateThing>
       </div>
 
       <div className="justify-content-space">
-        <a href="https://github.com/AndyycLee/leetcode-trainerv2" target="_blank"  >
-          <img height="26" src={github_img} alt="Github link"  id="github-img"/>
+        <a
+          href="https://github.com/AndyycLee/leetcode-trainerv2"
+          target="_blank">
+          <img height="26" src={github_img} alt="Github link" id="github-img" />
         </a>
         <a href="https://ko-fi.com/G2G2HI148" target="_blank">
           <img height="36" src={kofi_img} alt="Buy Me a Coffee at ko-fi.com" />

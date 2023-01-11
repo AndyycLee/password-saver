@@ -1,4 +1,4 @@
-import { getCurrentTab } from "../background/index"
+import { getCurrentTab } from "../background"
 
 const button = document.getElementById("my-button")
 

@@ -1,5 +1,5 @@
 
-const BodyText = () => (
+const BodyText = ({user}) => (
   <h1>
     Enjoy your{" "}
     <a
@@ -9,7 +9,7 @@ const BodyText = () => (
       rel="noopener noreferrer">
         <span className="orange">LeetCode</span>
     </a>{" "}
-    training!
+    training{user ? ` ${user.displayName}` : ""}!
   </h1>
 );
 

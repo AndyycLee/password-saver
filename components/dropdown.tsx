@@ -1,17 +1,27 @@
 import '../components_css/dropdown.css';
-import { ReactComponent as BellIcon } from './icons/bell.svg';
-import { ReactComponent as MessengerIcon } from './icons/messenger.svg';
-import { ReactComponent as CaretIcon } from './icons/caret.svg';
-import { ReactComponent as PlusIcon } from './icons/plus.svg';
-import { ReactComponent as CogIcon } from './icons/cog.svg';
-import { ReactComponent as ChevronIcon } from './icons/chevron.svg';
-import { ReactComponent as ArrowIcon } from './icons/arrow.svg';
-import { ReactComponent as BoltIcon } from './icons/bolt.svg';
+
+// @ts-ignore
+import { ReactComponent as BellIcon } from '../assets/icons/bell.svg';
+// @ts-ignore
+import { ReactComponent as MessengerIcon } from '../assets/icons/messenger.svg';
+// @ts-ignore
+import { ReactComponent as CaretIcon } from '../assets/icons/caret.svg';
+// @ts-ignore
+import { ReactComponent as PlusIcon } from '../assets/icons/plus.svg';
+// @ts-ignore
+import { ReactComponent as CogIcon } from '../assets/icons/cog.svg';
+// @ts-ignore
+import { ReactComponent as ChevronIcon } from '../assets/icons/chevron.svg';
+// @ts-ignore
+import { ReactComponent as ArrowIcon } from '../assets/icons/arrow.svg';
+// @ts-ignore
+import { ReactComponent as BoltIcon } from '../assets/icons/bolt.svg';
+
 
 import React, { useState, useEffect, useRef } from 'react';
-import { CSSTransition } from 'react-transition-group';
+// import { CSSTransition } from 'react-transition-group';
 
-function App() {
+function Dropdown() {
   return (
     <Navbar>
       <NavItem icon={<PlusIcon />} />
@@ -75,7 +85,7 @@ function DropdownMenu() {
     <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
 
       {/* <div>So the CSSTransition menu-primary-eneter effect only triggers on mount, so by default its quiet,</div> */}
-      <CSSTransition
+      {/* <CSSTransition
         in={activeMenu === 'main'}
         timeout={500}
         classNames="menu-primary"
@@ -131,9 +141,9 @@ function DropdownMenu() {
           <DropdownItem leftIcon="🦋">Horse?</DropdownItem>
           <DropdownItem leftIcon="🦔">Hedgehog</DropdownItem>
         </div>
-      </CSSTransition>
+      </CSSTransition> */}
     </div>
   );
 }
 
-export default App;
+export default Dropdown;
