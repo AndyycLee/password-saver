@@ -94,6 +94,8 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
           const listItemLink = document.createElement("a")
           listItemLink.href = doc.data().link
           listItemLink.innerHTML = doc.data().notes
+          listItemLink.target = "_blank"
+          listItemLink.rel = "noopener noreferrer"
           listItem.appendChild(listItemLink)
           // create delete button element
           const deleteButton = document.createElement("button")

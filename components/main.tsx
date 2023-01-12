@@ -13,7 +13,6 @@ import { auth } from "../firebase"
 
 import "../popup.css"
 
-import { sendToBackground } from "@plasmohq/messaging"
 import { NavigateFunction, useNavigate } from "react-router-dom"
 
 // import Questions_display_list from "~components/questions_display_list"
@@ -27,19 +26,21 @@ import BodyText from "./body_text"
 import CreateThing from "./createThing"
 import Button from "./interesting_button"
 import ImageLink from "./leetcode_logo"
-import Content_leetcode from "./url_leetcode"
+// import Content_leetcode from "./url_leetcode"
 
 setPersistence(auth, browserLocalPersistence)
 
 function IndexPopupMain({ setglobalUserAuthorized }) {
   const [isLoading, setIsLoading] = useState(false)
   const [user, setUser] = useState<User>(null)
-  const [websiteUrl, setWebsiteUrl] = useState<any>("")
 
   const onLogoutClicked = async () => {
     if (user) {
       await auth.signOut()
       setglobalUserAuthorized(null)
+      chrome.identity.clearAllCachedAuthTokens(
+        () => console.log("Cleared cached auth tokens" )
+      )
     }
   }
 
@@ -72,7 +73,7 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
         try {
           //const userData =
           await signInWithCredential(auth, credential)
-          console.log("Logged in with user data: ")
+          console.log("Logged in with user data")
           //return userData
         } catch (e) {
           console.error("Could not log in. ", e)

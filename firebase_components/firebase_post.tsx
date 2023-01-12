@@ -1,5 +1,4 @@
-import { onAuthStateChanged } from "firebase/auth"
-import { getFirestore, serverTimestamp } from "firebase/firestore"
+import { getFirestore } from "firebase/firestore"
 
 import { app } from "../firebase"
 

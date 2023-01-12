@@ -107,9 +107,9 @@ h1 {
   margin-left: 4px;
   display: flex;
   /* flex-wrap: wrap; */
-  
+  font-size: large;
   flex-direction: column;
-  gap: 10px; /* Add spacing between list items */
+  gap: 100px; /* Add spacing between list items */
   }
   
   #thingsList > li {
@@ -117,33 +117,28 @@ h1 {
   flex-direction: row; /* Align the a tag and button horizontally /
   justify-content: space-between; / Add space between the a tag and button /
   align-items: center; / Align the a tag and button vertically */
+  gap: 10px; /* Add spacing between the a tag and button */
   }
   
+  #thingsList > li:not(:last-child) {
+    margin-bottom: 5px;
+}
+
   #thingsList > li > a {
   text-decoration: none; /* Remove the underline from the text /
-  font-style: italic; / Add font style /
-  color: blue; / Change text color /
-  transition: all 0.5s ease; / Add a transition effect */
-  }
+  font-style: italic; / Add font style /*/
+  color: rgb(0, 0, 0); 
+
+}
   
   #thingsList > li > a:hover {
-  color: red; /* Change text color on hover /
-  text-decoration: underline; / Add an underline on hover */
+    text-decoration: underline;
+  text-decoration-color: peachpuff;
+  text-decoration-thickness: 2px;
   }
   
-  #thingsList > li > button {
-  background-color: transparent; /* Remove background color /
-  border: none; / Remove border /
-  color: red; / Change color /
-  padding: 0; / Remove padding /
-  font-size: 1.5rem; / Increase font size /
-  transition: all 0.5s ease; / Add a transition effect */
-  }
   
-  #thingsList > li > button:hover {
-  transform: scale(1.1); /* Increase button size on hover */
-  }
-
+ 
 body {
   background: #3778c2;
 }
@@ -163,11 +158,12 @@ body {
 }
 
 .home-button-css {
-  width: 160px;
+  width: 280px;
   height: 40px;
   margin: 0 auto;
   background-color: #94b69a;
-  margin-top: 12px;
+  margin-top: 0px;
+  margin-bottom: 15px;
   color: black;
 }
 .home-button-css:hover {
@@ -178,8 +174,10 @@ body {
 
 .deleter-collection {
   margin: 0 0 0 0;
-  width: 20px;
-  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  max-width: 20px;
+  max-height: 20px;
   font-size: medium;
   background-color: #ffe4e1;
   margin: 0;
@@ -194,7 +192,7 @@ body {
 }
 
 .go-to-button {
-  width: 160px;
+  width: 220px;
   height: 40px;
   margin: auto;
   margin-bottom: 12px;
