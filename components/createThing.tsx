@@ -20,6 +20,9 @@ const CreateThing: React.FC<MyComponentProps> = ({
         const resp = await sendToBackground({
           name: "ping"
         })
+
+        let notesParam
+
         if (
           resp === undefined ||
           resp.tab === undefined ||
@@ -28,14 +31,13 @@ const CreateThing: React.FC<MyComponentProps> = ({
           console.log(
             "Error: resp or resp.tab or resp.tab.url is undefined click on the page again"
           )
-          let notesParam =
-            "Error: resp or resp.tab or resp.tab.url is undefined click on the page again"
+          notesParam =
+            "Error: Click on the page again and reopen the extension"
         } else {
           const testTab = await resp.tab
           console.log(testTab)
           const tabUrl = await testTab.url
           console.log(tabUrl)
-          let notesParam;
 
           if (!tabUrl.includes("leetcode.com/problems/")) {
             console.log("Error: not a leetcode problem")
@@ -79,11 +81,11 @@ const CreateThing: React.FC<MyComponentProps> = ({
         style={{
           display: isRendered ? "block" : "none",
           width: page ? 240 : 300,
-          marginTop:10,
+          marginTop: 10
         }}>
         {page === "page1" && <span>Leetcodify or Save Link</span>}
         {page === "page2" && <span>Leetcodify Page 2</span>}
-        {!page && <span>Save a Leetcode Question or Link  </span>}{" "}
+        {!page && <span>Save a Leetcode Question or Link </span>}{" "}
       </button>
     </div>
   )

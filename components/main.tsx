@@ -39,7 +39,7 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
       await auth.signOut()
       setglobalUserAuthorized(null)
       chrome.identity.clearAllCachedAuthTokens(
-        () => console.log("Cleared cached auth tokens" )
+        () => console.log("Cleared cached auth tokens")
       )
     }
   }
