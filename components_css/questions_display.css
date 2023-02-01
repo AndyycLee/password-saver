@@ -106,39 +106,57 @@ h1 {
   margin: 0;
   margin-left: 4px;
   display: flex;
-  /* flex-wrap: wrap; */
+  /* overflow-wrap: break-word; */
   font-size: large;
   flex-direction: column;
   gap: 100px; /* Add spacing between list items */
-  }
+
+  list-style: circle;
+
   
-  #thingsList > li {
-  display: flex;
-  flex-direction: row; /* Align the a tag and button horizontally /
-  justify-content: space-between; / Add space between the a tag and button /
-  align-items: center; / Align the a tag and button vertically */
-  gap: 10px; /* Add spacing between the a tag and button */
-  }
-  
-  #thingsList > li:not(:last-child) {
-    margin-bottom: 5px;
 }
 
-  #thingsList > li > a {
+.my-li-class {
+  display: grid;
+  place-items: center;
+}
+
+.my-li-class::before {
+  /* content:url("../assets/fireghibli.jpg"); */
+  transform: scale(0.5);
+  left: 0;
+margin-right: -15px;
+padding: 0%;
+margin-left:-25px;
+}
+
+#thingsList > li {
+  display: flex;
+   margin: 0;
+  align-items: center;
+  gap: 10px;
+  /* Align the a tag and button horizontally /
+  justify-content: space-between; / Add space between the a tag and button /
+  /*  Add spacing between the a tag and button */
+}
+
+#thingsList > li:not(:last-child) {
+  margin-bottom: 14px;
+}
+
+
+#thingsList > li > a {
   text-decoration: none; /* Remove the underline from the text /
   font-style: italic; / Add font style /*/
-  color: rgb(0, 0, 0); 
-
+  color: rgb(0, 0, 0);
 }
-  
-  #thingsList > li > a:hover {
-    text-decoration: underline;
+
+#thingsList > li > a:hover {
+  text-decoration: underline;
   text-decoration-color: peachpuff;
   text-decoration-thickness: 2px;
-  }
-  
-  
- 
+}
+
 body {
   background: #3778c2;
 }

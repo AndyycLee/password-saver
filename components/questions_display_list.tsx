@@ -89,7 +89,7 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         querySnapshot.forEach((doc) => {
           // create list item element
           const listItem = document.createElement("li")
-          // listItem.setAttribute("class", "my-li-class")
+          listItem.setAttribute("class", "my-li-class")
 
           const listItemLink = document.createElement("a")
           listItemLink.href = doc.data().link
