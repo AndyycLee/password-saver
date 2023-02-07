@@ -56,7 +56,12 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
   let unsubscribe
   const createThing = document.getElementById("createThing")
   const thingsList = document.getElementById("thingsList")
-  //ret is optional
+  //ret is optional, thats the beauty of onAuthStateChanged, it runs immediately if its thedefault tab, otherwise you need UseEffect to wake up the page, and then it will be an observer
+  // and it will find that user and then runs again when the auth state changes, so itwakes up and does its run on navigation, and then it runs again when the auth state changes
+//onAuthStateChanged method will run on page load or navigation, in addition to running every time there is a change in the authentication state
+
+
+//because my sign in is on a different page, i could have useEffect auth = getAuth()and then render the UI instead of the wakey method of OnAtuhStateChange
   let ret = onAuthStateChanged(auth, async (user) => {
     if (user) {
       // Show the UI.
