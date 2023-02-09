@@ -1,3 +1,5 @@
+Created with TypeScript, React, and Firebase, an easy chrome extension for bookmarking tabs or saving LeetCode questions for your studying!
+
 This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
 
 ## Getting Started
