@@ -43,7 +43,7 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
       )
     }
   }
-
+// found thru plasmo docs
   const navigation: NavigateFunction = useNavigate()
 
   const onNextPage = (): void => {
@@ -51,6 +51,8 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
     console.log("Navigated to questions list")
     console.log(user)
     if (user) {
+      //is this even doing anything?? yes it is
+      console.log("uhello is this doing anything?")
       setglobalUserAuthorized(user)
     }
   }
