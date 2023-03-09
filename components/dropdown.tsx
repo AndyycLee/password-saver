@@ -1,5 +1,5 @@
 import '../components_css/dropdown.css';
-
+//yeah i was testing this out its not actually relevant to the project
 // @ts-ignore
 import { ReactComponent as BellIcon } from '../assets/icons/bell.svg';
 // @ts-ignore

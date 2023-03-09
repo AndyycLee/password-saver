@@ -61,6 +61,8 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
   //onAuthStateChanged method will run on page load or navigation, in addition to running every time there is a change in the authentication state
 
   //because my sign in is on a different page, i could have useEffect auth = getAuth()and then render the UI instead of the wakey method of OnAtuhStateChange
+  //tbh this isnt really the react way cuz im not managaing state, im kinda just seeing if there is a user since the onAuthStateChanged seems to run after the page has something load
+  // so if there is a user (found by importing auth) then i render the UI, else hide the UI
   let ret = onAuthStateChanged(auth, async (user) => {
     if (user) {
       // Show the UI.
