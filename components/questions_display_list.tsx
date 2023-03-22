@@ -90,6 +90,8 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         where("uid", "==", user.uid),
         orderBy("timestamp", "desc")
       )
+      //firebase is realtime, so onsnapshot rerenders the list everytime there is a change in the database
+      // basically it is a listener, and it will run everytime there is a change in the database and if the user is signed in cuz of onAuthStateChanged which calls the onSnapshot
       unsubscribe = onSnapshot(q, (querySnapshot) => {
         thingsList.innerHTML = "" // clear the thingsList element
         querySnapshot.forEach((doc) => {
