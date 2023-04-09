@@ -20,7 +20,7 @@ const CreateThing: React.FC<MyComponentProps> = ({
 
       const event = {
         summary: `LeetCode: ${title}`,
-        description: `LeetCode: ${title}  - ${link}`,
+        description: `LeetCode: ${title} - ${link}`,
         start: {
           dateTime: oneWeekFromNow.toISOString(), // Date.toISOString() ->
           timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone // Canada/Alberta
