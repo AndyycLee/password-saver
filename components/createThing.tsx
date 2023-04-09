@@ -17,7 +17,7 @@ const CreateThing: React.FC<MyComponentProps> = ({
       console.log("Creating calendar event")
       const now = new Date()
       const oneWeekFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000) // add 7 days
-
+      
       const event = {
         summary: `LeetCode: ${title}`,
         description: `LeetCode: ${title} - ${link}`,
@@ -83,7 +83,7 @@ const CreateThing: React.FC<MyComponentProps> = ({
 
           if (!tabUrl.includes("leetcode.com/problems/")) {
             console.log("Error: not a leetcode problem")
-            notesParam = `${tabUrl}`
+            notesParam = `${testTab.title}`
           } else {
             //get notes for leetcode question
             let problemName = tabUrl.match(/\/problems\/(.*)/)[1]
