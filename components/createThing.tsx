@@ -10,6 +10,49 @@ const CreateThing: React.FC<MyComponentProps> = ({
   user,
   page
 }) => {
+  async function createCalendarEvent(title: string, link: string) {
+    chrome.identity.getAuthToken({ interactive: true }, async function (token) {
+
+      console.log("userAccessToken real: ", token)
+      console.log("Creating calendar event")
+      const now = new Date()
+      const oneWeekFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000) // add 7 days
+
+      const event = {
+        summary: `LeetCode: ${title}`,
+        description: `LeetCode: ${title}  - ${link}`,
+        start: {
+          dateTime: oneWeekFromNow.toISOString(), // Date.toISOString() ->
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone // Canada/Alberta
+        },
+        end: {
+          dateTime: oneWeekFromNow.toISOString(), //serverTimestamp(), // Date.toISOString() ->
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone // ex: America/Los_Angeles
+        }
+      }
+      await fetch(
+        "https://www.googleapis.com/calendar/v3/calendars/primary/events",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + token // Access token for google
+          },
+          body: JSON.stringify(event)
+        }
+      )
+        .then((data) => {
+          return data.json()
+        })
+        .then((data) => {
+          console.log(data)
+          console.log("Event created, check your Google Calendar!")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    })
+  }
+
   if (user) {
     const createThing = document.getElementById("createThing")
 
@@ -31,8 +74,7 @@ const CreateThing: React.FC<MyComponentProps> = ({
           console.log(
             "Error: resp or resp.tab or resp.tab.url is undefined click on the page again"
           )
-          notesParam =
-            "Error: Click on the page again and reopen the extension"
+          notesParam = "Error: Click on the page again and reopen the extension"
         } else {
           const testTab = await resp.tab
           console.log(testTab)
@@ -53,6 +95,7 @@ const CreateThing: React.FC<MyComponentProps> = ({
             notesParam = problem
 
             console.log(problem)
+            createCalendarEvent(notesParam, tabUrl)
           }
           // Add a new document to collection leetcode-users-collection with a generated id.
           const docRef = await addDoc(
@@ -65,7 +108,7 @@ const CreateThing: React.FC<MyComponentProps> = ({
             }
           )
           console.log("Document written with ID: ", docRef.id)
-          // console.log(serverTimestamp())
+          console.log(serverTimestamp())
         }
       } catch (e) {
         console.log(e)
@@ -99,5 +142,6 @@ interface MyComponentProps {
 
   isRendered?: boolean
   user?: User
+  userAccessToken?: string
   // setWebsiteUrl?: (url: string) => void
 }

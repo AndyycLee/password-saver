@@ -4,7 +4,7 @@ import {
   browserLocalPersistence,
   onAuthStateChanged,
   setPersistence,
-  signInWithCredential
+  signInWithCredential 
 } from "firebase/auth"
 import { useEffect, useState } from "react"
 
@@ -31,8 +31,9 @@ import ImageLink from "./leetcode_logo"
 setPersistence(auth, browserLocalPersistence)
 
 function IndexPopupMain({ setglobalUserAuthorized }) {
-  const [isLoading, setIsLoading] = useState(false)
-  const [user, setUser] = useState<User>(null)
+  const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState<User>(null);
+  // const [userAccessToken, setUserAccessToken] = useState<string>(null);
 
   const onLogoutClicked = async () => {
     if (user) {
@@ -57,7 +58,9 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
     }
   }
 
-  //is this outdated? should i use a different firebase auth ? is gooogle id services replacing firebase auth?
+  //is this outdated? should i use a different firebase auth ? is gooogle id services replacing firebase auth? no
+
+  
 
   // When the user clicks log in, we need to ask Chrome
   // to log them in, get their Google auth token,
@@ -73,9 +76,12 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
       if (token) {
         const credential = GoogleAuthProvider.credential(null, token)
         try {
-          //const userData =
-          await signInWithCredential(auth, credential)
+          // for some reason signInWithPopup doesnt work instead of signInWithCredential
+          const testCredential = await signInWithCredential(auth, credential)
           console.log("Logged in with user data")
+          console.log("User Access token:", credential.accessToken);
+          // setUserAccessToken(credential.accessToken); the <User> user.acessToken is the same as the credential.accessToken, but for some reason I need to do the strange
+          // work around to get the access token, rather than using the user state. I also think the access token expires in 7 days, so I need to refresh it if I want to add that
           //return userData
         } catch (e) {
           console.error("Could not log in. ", e)
@@ -139,9 +145,9 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
       <div>
         {" "}
         {/* <button className="my-button">Get Current Tab URL</button> */}
-        {/* Below breaks code */}
+        {/* Below breaks code userAccessToken={userAccessToken}*/}
         {/* <Content_leetcode /> */}
-        <CreateThing isRendered={true} user={user} page={"page1"}></CreateThing>
+        <CreateThing isRendered={true} user={user} page={"page1"} ></CreateThing>
       </div>
 
       <div className="justify-content-space">
