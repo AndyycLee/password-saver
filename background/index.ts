@@ -9,7 +9,7 @@ export async function getCurrentTab() {
   }
 }
 
-
+// this runs in the background page every time the popup is opened
   let testTab = getCurrentTab();
   console.log(
    "Live now; make now always the most precious time. Now will never come again.", testTab
