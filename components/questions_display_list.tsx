@@ -24,6 +24,7 @@ import type { User } from "firebase/auth"
 // import Button from "./interesting_button"
 
 import CreateThing from "./createThing"
+import React from "react"
 
 // import Dropdown from "./dropdown"
 
@@ -131,9 +132,10 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         // thingsList.innerHTML = items
       })
     } else {
-      // Hide the UI.
-      createThing.style.display = "none"
-      thingsList.style.display = "none"
+      // Why the UI hiding is uncessary: 1. createThing is rendered by isRendered (checks for auth user) 2. thingsList is initally empty, only rendered elements after if theres a user
+      // the initally empty list is populated by the onSnapshot listener , only called if there is a user (onAuthStateChanged)
+      // createThing.style.display = "none"
+      // thingsList.style.display = "none"
 
       unsubscribe && unsubscribe()
       console.log("No user is signed in.")
@@ -171,7 +173,7 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         flexDirection: "column",
         padding: 16
       }}>
-      <section>
+      <section className="flex-column">
         <button onClick={onNextPage} className="cool-css home-button-css">
           Home
         </button>

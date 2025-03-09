@@ -1,11 +1,9 @@
-
 .App-logo {
   max-width: 100px;
 
   height: auto;
- padding-top: 6px;
- padding: 0px;
-
+  padding-top: 6px;
+  padding: 0px;
 }
 .justify-content-space {
   margin-top: 5px;
@@ -24,6 +22,7 @@ h1 {
 }
 
 .App {
+  min-width: 300px;
   background: #e1f2f7;
   font-family: "Helvetica", sans-serif;
   color: rgb(1, 1, 32);

@@ -4,6 +4,7 @@ import type { User } from "firebase/auth"
 
 import IndexPopupMain from "../components/main"
 import Questions_display_list from "../components/questions_display_list"
+import React from "react"
 
 export const Routing = () => {
   const [globalUserAuthorized, setglobalUserAuthorized] = useState<User>(null)

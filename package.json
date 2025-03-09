@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@plasmohq/messaging": "^0.0.2",
-    "firebase": "9.15.0",
+    "firebase": "^9.23.0",
     "plasmo": "0.61.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -41,7 +41,10 @@
       "scopes": [
         "https://www.googleapis.com/auth/userinfo.email",
         "https://www.googleapis.com/auth/userinfo.profile",
-        "https://www.googleapis.com/auth/calendar"
+        "https://www.googleapis.com/auth/calendar",
+        "openid",
+        "email",
+        "profile"
       ]
     }
   }

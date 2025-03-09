@@ -1,11 +1,15 @@
-import { getFirestore } from "firebase/firestore"
+import { getFirestore, initializeFirestore } from "firebase/firestore"
 
 import { app } from "../firebase"
 
 // Get a Firestore instance const db = firebase.firestore()
 
-const db = getFirestore(app)
-
+const db = getFirestore(app) // old code, why does it not work anymore?
+// const db = getFirestore(app, "leetcoderv3-daef7") // for some reason i need to use the firestore id
+// const db = initializeFirestore(app, {
+//   experimentalForceLongPolling: true,
+  
+// })
 //exort the db, and then import in popup.tsx, i think next
 //step is to create a new collection in firebase just like thingsRef = db.collection('things');
 
@@ -25,8 +29,4 @@ const db = getFirestore(app)
 // let timestamp = serverTimestamp()
 //export const db = getFirestore(app);
 
-
-
-
 export { db }
-

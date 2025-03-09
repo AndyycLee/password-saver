@@ -4,8 +4,10 @@ import {
   browserLocalPersistence,
   onAuthStateChanged,
   setPersistence,
-  signInWithCredential 
+  signInWithCredential,
+  signInWithPopup
 } from "firebase/auth"
+import React from "react"
 import { useEffect, useState } from "react"
 
 // import { getCurrentTab } from "../background"
@@ -26,25 +28,26 @@ import BodyText from "./body_text"
 import CreateThing from "./createThing"
 import Button from "./interesting_button"
 import ImageLink from "./leetcode_logo"
+
 // import Content_leetcode from "./url_leetcode"
 
 setPersistence(auth, browserLocalPersistence)
 
 function IndexPopupMain({ setglobalUserAuthorized }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState<User>(null);
+  const [isLoading, setIsLoading] = useState(false)
+  const [user, setUser] = useState<User>(null)
   // const [userAccessToken, setUserAccessToken] = useState<string>(null);
 
   const onLogoutClicked = async () => {
     if (user) {
       await auth.signOut()
       setglobalUserAuthorized(null)
-      chrome.identity.clearAllCachedAuthTokens(
-        () => console.log("Cleared cached auth tokens")
+      chrome.identity.clearAllCachedAuthTokens(() =>
+        console.log("Cleared cached auth tokens")
       )
     }
   }
-// found thru plasmo docs
+  // found thru plasmo docs
   const navigation: NavigateFunction = useNavigate()
 
   const onNextPage = (): void => {
@@ -59,8 +62,6 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
   }
 
   //is this outdated? should i use a different firebase auth ? is gooogle id services replacing firebase auth? no
-
-  
 
   // When the user clicks log in, we need to ask Chrome
   // to log them in, get their Google auth token,
@@ -79,7 +80,7 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
           // for some reason signInWithPopup doesnt work instead of signInWithCredential
           const testCredential = await signInWithCredential(auth, credential)
           console.log("Logged in with user data")
-          console.log("User Access token:", credential.accessToken);
+          console.log("User Access token:", credential.accessToken)
           // setUserAccessToken(credential.accessToken); the <User> user.acessToken is the same as the credential.accessToken, but for some reason I need to do the strange
           // work around to get the access token, rather than using the user state. I also think the access token expires in 7 days, so I need to refresh it if I want to add that
           //return userData
@@ -113,41 +114,42 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
       <ImageLink />
 
       <BodyText user={user} />
-      <div style={{display:"flex",alignItems:"center",justifyContent:"center" }}>
-
-{!user ? (
-        <Button
-          secondary
-          onClick={() => {
-            setIsLoading(true)
-            onLoginClicked()
-          }}>
-          <img src={googleLogo} alt="google-logo" className="google-img" />
-          Google Log in
-        </Button>
-      ) : (
-        <Button
-          secondary
-          onClick={() => {
-            setIsLoading(true)
-            onLogoutClicked()
-          }}>
-          <img src={googleLogo} alt="google-logo" className="google-img" />
-          Log out
-        </Button>
-      )}
-</div>
-      
-      <div>
-        {isLoading ? "Loading..." : ""}
-        
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}>
+        {!user ? (
+          <Button
+            secondary
+            onClick={() => {
+              setIsLoading(true)
+              onLoginClicked()
+            }}>
+            <img src={googleLogo} alt="google-logo" className="google-img" />
+            Google Log in
+          </Button>
+        ) : (
+          <Button
+            secondary
+            onClick={() => {
+              setIsLoading(true)
+              onLogoutClicked()
+            }}>
+            <img src={googleLogo} alt="google-logo" className="google-img" />
+            Log out
+          </Button>
+        )}
       </div>
+
+      <div>{isLoading ? "Loading..." : ""}</div>
       <div>
         {" "}
         {/* <button className="my-button">Get Current Tab URL</button> */}
         {/* Below breaks code userAccessToken={userAccessToken}*/}
         {/* <Content_leetcode /> */}
-        <CreateThing isRendered={true} user={user} page={"page1"} ></CreateThing>
+        <CreateThing isRendered={true} user={user} page={"page1"}></CreateThing>
       </div>
 
       <div className="justify-content-space">
