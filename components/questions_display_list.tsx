@@ -42,7 +42,7 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
   const handleDocumentDelete = async (e, timestamp: any) => {
     e.preventDefault()
     //i named it timestamp, but in reality it is the id of the document
-    const docRef = doc(db, "leetcode-users-collection", timestamp)
+    const docRef = doc(db, "password-users-collection", timestamp)
     await deleteDoc(docRef).catch((error) => {
       console.error("Error removing document: ", error)
     })
@@ -87,7 +87,7 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
       //   // console.log(serverTimestamp())
       // }
       const q = query(
-        collection(db, "leetcode-users-collection"),
+        collection(db, "password-users-collection"),
         where("uid", "==", user.uid),
         orderBy("timestamp", "desc")
       )
@@ -100,12 +100,16 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
           const listItem = document.createElement("li")
           listItem.setAttribute("class", "my-li-class")
 
-          const listItemLink = document.createElement("a")
-          listItemLink.href = doc.data().link
-          listItemLink.innerHTML = doc.data().notes
-          listItemLink.target = "_blank"
-          listItemLink.rel = "noopener noreferrer"
-          listItem.appendChild(listItemLink)
+          // create key element
+          const keyElement = document.createElement("span")
+          keyElement.setAttribute("class", "key-class")
+          keyElement.innerHTML = doc.data().key // assuming 'key' is the field name for the key
+
+          // create value element
+          const valueElement = document.createElement("span")
+          valueElement.setAttribute("class", "value-class")
+          valueElement.innerHTML = doc.data().value // assuming 'value' is the field name for the value
+
           // create delete button element
           const deleteButton = document.createElement("button")
           deleteButton.className = "deleter-collection cool-css"
@@ -114,22 +118,16 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
             handleDocumentDelete(e, doc.id)
           }
 
+          // append key and value elements to list item
+          listItem.appendChild(keyElement)
+          listItem.appendChild(valueElement)
           // append delete button to list item
           listItem.appendChild(deleteButton)
 
-          // append list item to thingsList element - is this inefficient? or does firebase batch updates?
+          // append list item to thingsList element
           thingsList.appendChild(listItem)
           console.log("hello onSnapshot", listItem)
         })
-
-        // let items = ""
-        // querySnapshot.forEach((doc) => {
-        //   //I want to add a button to delete the question from the list on each question -  docRef.id
-        //   items += `<li>${
-        //     doc.data().notes
-        //   }</li> <button class="deleter-collection" onclick={ (e) =>{return handleDocumentDelete(e,doc.data().timestamp)}} >delete</button>`
-        // })
-        // thingsList.innerHTML = items
       })
     } else {
       // Why the UI hiding is uncessary: 1. createThing is rendered by isRendered (checks for auth user) 2. thingsList is initally empty, only rendered elements after if theres a user
@@ -179,12 +177,7 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         </button>
         <ul id="thingsList"></ul>{" "}
         <CreateThing isRendered={isRendered} user={testUser}></CreateThing>
-        {/* <button
-          className="cool-css"
-          id="createThing"
-          style={{ display: isRendered ? "block" : "none" }}>
-          Make a leetcode question
-        </button> */}
+
         {isRendered ? (
           <div></div>
         ) : (

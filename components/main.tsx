@@ -39,14 +39,30 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
   // const [userAccessToken, setUserAccessToken] = useState<string>(null);
 
   const onLogoutClicked = async () => {
-    if (user) {
-      await auth.signOut()
-      setglobalUserAuthorized(null)
-      chrome.identity.clearAllCachedAuthTokens(() =>
-        console.log("Cleared cached auth tokens")
-      )
-    }
+    chrome.identity.getAuthToken({ interactive: false }, (token) => {
+      if (token) {
+        // Step 1: Remove cached token from Chrome
+        chrome.identity.removeCachedAuthToken({ token }, () => {
+          console.log("Cached token removed from Chrome")
+
+          // Step 2: Sign out from Firebase
+          auth.signOut().then(() => {
+            console.log("User signed out from Firebase")
+          })
+        })
+
+        // Step 3: Revoke token globally from Google
+        fetch(`https://accounts.google.com/o/oauth2/revoke?token=${token}`)
+          .then(() => {
+            console.log("Google token revoked")
+          })
+          .catch((error) => console.error("Error revoking token:", error))
+      } else {
+        console.log("No token found to revoke")
+      }
+    })
   }
+
   // found thru plasmo docs
   const navigation: NavigateFunction = useNavigate()
 
@@ -68,26 +84,30 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
   // send it to Firebase, and let Firebase do its magic
   // if everything worked, we'll get a user object from them
   const onLoginClicked = () => {
-    chrome.identity.getAuthToken({ interactive: true }, async function (token) {
-      if (chrome.runtime.lastError || !token) {
-        console.error(chrome.runtime.lastError)
-        setIsLoading(false)
-        return
-      }
-      if (token) {
-        const credential = GoogleAuthProvider.credential(null, token)
-        try {
-          // for some reason signInWithPopup doesnt work instead of signInWithCredential
-          const testCredential = await signInWithCredential(auth, credential)
-          console.log("Logged in with user data")
-          console.log("User Access token:", credential.accessToken)
-          // setUserAccessToken(credential.accessToken); the <User> user.acessToken is the same as the credential.accessToken, but for some reason I need to do the strange
-          // work around to get the access token, rather than using the user state. I also think the access token expires in 7 days, so I need to refresh it if I want to add that
-          //return userData
-        } catch (e) {
-          console.error("Could not log in. ", e)
+    chrome.identity.clearAllCachedAuthTokens(() => {
+      chrome.identity.getAuthToken(
+        { interactive: true },
+        async function (token) {
+          if (chrome.runtime.lastError || !token) {
+            console.error(chrome.runtime.lastError)
+            setIsLoading(false)
+            return
+          }
+          if (token) {
+            const credential = GoogleAuthProvider.credential(null, token)
+            try {
+              const userCredential = await signInWithCredential(
+                auth,
+                credential
+              )
+              console.log("Logged in with user data")
+              console.log("User Access token:", credential.accessToken)
+            } catch (e) {
+              console.error("Could not log in. ", e)
+            }
+          }
         }
-      }
+      )
     })
   }
 

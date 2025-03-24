@@ -13,6 +13,7 @@
     "background/messages/ping.ts"
   ],
   "compilerOptions": {
+    "esModuleInterop": true,
     "jsx": "react",
     "paths": {
       "~*": [

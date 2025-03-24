@@ -1,4 +1,5 @@
 import { getCurrentTab } from "../background"
+import React from "react"
 
 const button = document.getElementById("my-button")
 // this is the proper way, look at createThing function in createThing.tsx

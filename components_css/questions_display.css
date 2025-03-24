@@ -224,3 +224,25 @@ body {
   color: #000;
   background-color: #4cb69f;
 }
+
+.my-li-class {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.key-class {
+  flex: 1;
+  font-weight: bold;
+}
+
+.value-class {
+  flex: 2;
+  margin-left: 16px;
+}
+
+.deleter-collection {
+  margin-left: 16px;
+}

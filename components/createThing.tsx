@@ -12,12 +12,11 @@ const CreateThing: React.FC<MyComponentProps> = ({
 }) => {
   async function createCalendarEvent(title: string, link: string) {
     chrome.identity.getAuthToken({ interactive: true }, async function (token) {
-
       console.log("userAccessToken real: ", token)
       console.log("Creating calendar event")
       const now = new Date()
       const oneWeekFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000) // add 7 days
-      
+
       const event = {
         summary: `LeetCode: ${title}`,
         description: `LeetCode: ${title} - ${link}`,
@@ -99,7 +98,7 @@ const CreateThing: React.FC<MyComponentProps> = ({
           }
           // Add a new document to collection leetcode-users-collection with a generated id.
           const docRef = await addDoc(
-            collection(db, "leetcode-users-collection"),
+            collection(db, "password-users-collection"),
             {
               notes: `${notesParam}`,
               timestamp: serverTimestamp(),

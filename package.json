@@ -1,8 +1,8 @@
 {
-  "name": "leetcode-trainer",
-  "displayName": "Leetcode trainer/Link Saver",
+  "name": "password-chrome-extension",
+  "displayName": "Password Saver Chrome Extension",
   "version": "0.0.0",
-  "description": "Save links and train on leetcode problems",
+  "description": "Save passwords as you please!",
   "author": "calga",
   "scripts": {
     "dev": "plasmo dev",
@@ -41,7 +41,6 @@
       "scopes": [
         "https://www.googleapis.com/auth/userinfo.email",
         "https://www.googleapis.com/auth/userinfo.profile",
-        "https://www.googleapis.com/auth/calendar",
         "openid",
         "email",
         "profile"
