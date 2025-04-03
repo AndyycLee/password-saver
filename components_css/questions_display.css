@@ -40,7 +40,9 @@ h1 {
   color: rgb(1, 1, 32);
 }
 .questions-display-body {
-  min-width: 400px;
+  min-width: 500px;
+  max-width: none; /* Allow it to expand without a cap */
+  width: 100%; /* Make it take up the full available width */
 }
 
 .flex-column {
@@ -79,7 +81,8 @@ h1 {
   font-size: 16px;
 
   /* Change the size of the button */
-  width: 250px;
+  width: auto; /* Allow the button to expand dynamically */
+  max-width: none; /* Remove any width cap */
   height: 50px;
   /* Add a border */
   border: 2px solid #9478b3;
@@ -138,8 +141,8 @@ h1 {
   margin: 0;
   align-items: center;
   gap: 10px;
-  /* Align the a tag and button horizontally /
-  justify-content: space-between; / Add space between the a tag and button /
+  /* Align the a tag and button horizontally / 
+  justify-content: space-between; / Add space between the a tag and button / 
   /*  Add spacing between the a tag and button */
 }
 
@@ -148,7 +151,7 @@ h1 {
 }
 
 #thingsList > li > a {
-  text-decoration: none; /* Remove the underline from the text /
+  text-decoration: none; /* Remove the underline from the text / 
   font-style: italic; / Add font style /*/
   color: rgb(0, 0, 0);
 }
@@ -225,14 +228,6 @@ body {
   background-color: #4cb69f;
 }
 
-.my-li-class {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px;
-  border-bottom: 1px solid #ccc;
-}
-
 .key-class {
   flex: 1;
   font-weight: bold;
@@ -245,4 +240,28 @@ body {
 
 .deleter-collection {
   margin-left: 16px;
+}
+.key-class,
+.value-class {
+  flex: 1; /* Allow the input fields to grow and take available space */
+  min-width: 0; /* Prevent inputs from overflowing their container */
+  border: none; /* Remove the border */
+  padding: 8px 12px; /* Add padding for better spacing */
+  border-radius: 16px; /* Rounded corners */
+  background-color: rgba(255, 255, 255, 0.8); /* Light background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  font-size: 16px; /* Adjust font size */
+  color: #333; /* Text color */
+  outline: none; /* Remove default outline */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+  overflow: hidden; /* Prevent text overflow */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Add focus styles for better user experience */
+.key-class:focus,
+.value-class:focus {
+  background-color: #fff; /* Highlight the field on focus */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
 }

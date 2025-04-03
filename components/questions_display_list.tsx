@@ -9,6 +9,7 @@ import {
   orderBy,
   query,
   serverTimestamp,
+  updateDoc,
   where
 } from "firebase/firestore"
 import { useEffect, useState } from "react"
@@ -20,11 +21,11 @@ import { db } from "../firebase_components/firebase_post"
 import "../components_css/questions_display.css"
 
 import type { User } from "firebase/auth"
+import React from "react"
 
 // import Button from "./interesting_button"
 
 import CreateThing from "./createThing"
-import React from "react"
 
 // import Dropdown from "./dropdown"
 
@@ -101,14 +102,34 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
           listItem.setAttribute("class", "my-li-class")
 
           // create key element
-          const keyElement = document.createElement("span")
+          const keyElement = document.createElement("input")
           keyElement.setAttribute("class", "key-class")
-          keyElement.innerHTML = doc.data().key // assuming 'key' is the field name for the key
+          keyElement.value = doc.data().key // Set the initial value
+          keyElement.onchange = async function (e) {
+            // Persist key field changes to Firebase
+            const newValue = (e.target as HTMLInputElement).value
+            try {
+              await updateDoc(doc.ref, { key: newValue })
+              console.log("Key updated to:", newValue)
+            } catch (error) {
+              console.error("Error updating key:", error)
+            }
+          }
 
           // create value element
-          const valueElement = document.createElement("span")
+          const valueElement = document.createElement("input")
           valueElement.setAttribute("class", "value-class")
-          valueElement.innerHTML = doc.data().value // assuming 'value' is the field name for the value
+          valueElement.value = doc.data().value // Set the initial value
+          valueElement.onchange = async function (e) {
+            // Persist value field changes to Firebase
+            const newValue = (e.target as HTMLInputElement).value
+            try {
+              await updateDoc(doc.ref, { value: newValue })
+              console.log("Value updated to:", newValue)
+            } catch (error) {
+              console.error("Error updating value:", error)
+            }
+          }
 
           // create delete button element
           const deleteButton = document.createElement("button")
@@ -177,7 +198,6 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         </button>
         <ul id="thingsList"></ul>{" "}
         <CreateThing isRendered={isRendered} user={testUser}></CreateThing>
-
         {isRendered ? (
           <div></div>
         ) : (
@@ -190,7 +210,7 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
 
       {/* <Dropdown></Dropdown> */}
     </div>
-  );
+  )
 }
 
 export default Questions_display_list

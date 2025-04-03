@@ -51,6 +51,10 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
           })
         })
 
+        chrome.identity.clearAllCachedAuthTokens(() =>
+          console.log("Cleared cached auth tokens")
+        )
+
         // Step 3: Revoke token globally from Google
         fetch(`https://accounts.google.com/o/oauth2/revoke?token=${token}`)
           .then(() => {
@@ -128,7 +132,7 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
         padding: 16
       }}>
       <button onClick={onNextPage} className="go-to-button cool-css">
-        Questions List
+        Passwords List
       </button>
 
       <ImageLink />
@@ -173,9 +177,7 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
       </div>
 
       <div className="justify-content-space">
-        <a
-          href="https://github.com/AndyycLee/leetcode-trainerv2"
-          target="_blank">
+        <a href="https://github.com/AndyycLee/password-saver" target="_blank">
           <img height="26" src={github_img} alt="Github link" id="github-img" />
         </a>
         <a href="https://ko-fi.com/G2G2HI148" target="_blank">

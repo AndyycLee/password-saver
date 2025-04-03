@@ -7,7 +7,7 @@ import unlocked_logo from "../assets/unlocked_logo.png"
 
 const ImageLink = () => (
   <a
-    href="https://ctftime.org/ctf-wtf/"
+    href="https://passwords.google.com/"
     target="_blank"
     rel="noopener noreferrer"
     className="test">

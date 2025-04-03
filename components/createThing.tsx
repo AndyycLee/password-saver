@@ -10,48 +10,6 @@ const CreateThing: React.FC<MyComponentProps> = ({
   user,
   page
 }) => {
-  async function createCalendarEvent(title: string, link: string) {
-    chrome.identity.getAuthToken({ interactive: true }, async function (token) {
-      console.log("userAccessToken real: ", token)
-      console.log("Creating calendar event")
-      const now = new Date()
-      const oneWeekFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000) // add 7 days
-
-      const event = {
-        summary: `LeetCode: ${title}`,
-        description: `LeetCode: ${title} - ${link}`,
-        start: {
-          dateTime: oneWeekFromNow.toISOString(), // Date.toISOString() ->
-          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone // Canada/Alberta
-        },
-        end: {
-          dateTime: oneWeekFromNow.toISOString(), //serverTimestamp(), // Date.toISOString() ->
-          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone // ex: America/Los_Angeles
-        }
-      }
-      await fetch(
-        "https://www.googleapis.com/calendar/v3/calendars/primary/events",
-        {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer " + token // Access token for google
-          },
-          body: JSON.stringify(event)
-        }
-      )
-        .then((data) => {
-          return data.json()
-        })
-        .then((data) => {
-          console.log(data)
-          console.log("Event created, check your Google Calendar!")
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    })
-  }
-
   if (user) {
     const createThing = document.getElementById("createThing")
 
@@ -79,6 +37,7 @@ const CreateThing: React.FC<MyComponentProps> = ({
           console.log(testTab)
           const tabUrl = await testTab.url
           console.log(tabUrl)
+          let r = (Math.random() + 1).toString(36).substring(2)
 
           if (!tabUrl.includes("leetcode.com/problems/")) {
             console.log("Error: not a leetcode problem")
@@ -94,16 +53,16 @@ const CreateThing: React.FC<MyComponentProps> = ({
             notesParam = problem
 
             console.log(problem)
-            createCalendarEvent(notesParam, tabUrl)
           }
           // Add a new document to collection leetcode-users-collection with a generated id.
           const docRef = await addDoc(
             collection(db, "password-users-collection"),
             {
-              notes: `${notesParam}`,
+              key: `${notesParam}`,
               timestamp: serverTimestamp(),
               uid: user.uid,
-              link: tabUrl
+              link: tabUrl,
+              value: `${r}`
             }
           )
           console.log("Document written with ID: ", docRef.id)
@@ -125,9 +84,9 @@ const CreateThing: React.FC<MyComponentProps> = ({
           width: page ? 240 : 300,
           marginTop: 10
         }}>
-        {page === "page1" && <span>Leetcodify or Save Link</span>}
+        {page === "page1" && <span>Webpage to Password</span>}
         {page === "page2" && <span>Leetcodify Page 2</span>}
-        {!page && <span>Save a Leetcode Question or Link </span>}{" "}
+        {!page && <span>Save a Password! </span>}{" "}
       </button>
     </div>
   )
