@@ -17,6 +17,9 @@ import { NavigateFunction, useNavigate } from "react-router-dom"
 
 import { auth } from "../firebase"
 import { db } from "../firebase_components/firebase_post"
+import { decryptValue, encryptValue } from "./encryption"
+
+// 🔁 use AES methods
 
 import "../components_css/questions_display.css"
 
@@ -73,20 +76,6 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
         thingsList.style.display = "block"
       }
 
-      // createThing.onclick = async () => {
-      //   // Add a new document to collection leetcode-users-collection with a generated id.
-      //   const docRef = await addDoc(
-      //     collection(db, "leetcode-users-collection"),
-      //     {
-      //       notes: `random num: ${Math.random()}`,
-      //       timestamp: serverTimestamp(),
-      //       uid: user.uid,
-      //       link: "https://leetcode.com/problems/diameter-of-binary-tree/"
-      //     }
-      //   )
-      //   console.log("Document written with ID: ", docRef.id)
-      //   // console.log(serverTimestamp())
-      // }
       const q = query(
         collection(db, "password-users-collection"),
         where("uid", "==", user.uid),
@@ -121,15 +110,41 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
           valueElement.setAttribute("class", "value-class")
           valueElement.value = doc.data().value // Set the initial value
           valueElement.onchange = async function (e) {
-            // Persist value field changes to Firebase
             const newValue = (e.target as HTMLInputElement).value
             try {
-              await updateDoc(doc.ref, { value: newValue })
-              console.log("Value updated to:", newValue)
+              const encrypted = await encryptValue(newValue)
+              await updateDoc(doc.ref, { value: encrypted })
+              console.log("Encrypted value updated")
             } catch (error) {
-              console.error("Error updating value:", error)
+              console.error("Error updating encrypted value:", error)
             }
           }
+
+          // create reveal button element
+          const copyButton = document.createElement("button")
+          copyButton.textContent = "Copy"
+          copyButton.className = "cool-css"
+          copyButton.onclick = async () => {
+            try {
+              const encrypted = doc.data().value
+          
+              if (!encrypted.match(/^[A-Za-z0-9+/=]+$/)) {
+                throw new Error("Value is not valid Base64. Not encrypted?")
+              }
+          
+              const decrypted = await decryptValue(encrypted)
+              await navigator.clipboard.writeText(decrypted)
+              console.log("Copied decrypted text:", decrypted)
+              console.log("Encrypted text:", encrypted)
+              copyButton.textContent = "Copied!"
+              setTimeout(() => (copyButton.textContent = "Copy"), 1500)
+            } catch (err) {
+              console.error("Clipboard copy failed:", err)
+              copyButton.textContent = "Error"
+              setTimeout(() => (copyButton.textContent = "Copy"), 1500)
+            }
+          }
+          
 
           // create delete button element
           const deleteButton = document.createElement("button")
@@ -143,6 +158,7 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
           listItem.appendChild(keyElement)
           listItem.appendChild(valueElement)
           // append delete button to list item
+          listItem.appendChild(copyButton)
           listItem.appendChild(deleteButton)
 
           // append list item to thingsList element
@@ -207,8 +223,6 @@ const Questions_display_list = ({ globalUserAuthorized }) => {
           </h2>
         )}
       </section>
-
-      {/* <Dropdown></Dropdown> */}
     </div>
   )
 }

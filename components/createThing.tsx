@@ -4,6 +4,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import React from "react"
 
 import { db } from "../firebase_components/firebase_post"
+import { encryptValue } from "./encryption"
 
 const CreateThing: React.FC<MyComponentProps> = ({
   isRendered,
@@ -38,7 +39,7 @@ const CreateThing: React.FC<MyComponentProps> = ({
           const tabUrl = await testTab.url
           console.log(tabUrl)
           let r = (Math.random() + 1).toString(36).substring(2)
-
+          let encryptedValue = await encryptValue(r)
           if (!tabUrl.includes("leetcode.com/problems/")) {
             console.log("Error: not a leetcode problem")
             notesParam = `${testTab.title}`
@@ -62,7 +63,7 @@ const CreateThing: React.FC<MyComponentProps> = ({
               timestamp: serverTimestamp(),
               uid: user.uid,
               link: tabUrl,
-              value: `${r}`
+              value: `${encryptedValue}`
             }
           )
           console.log("Document written with ID: ", docRef.id)

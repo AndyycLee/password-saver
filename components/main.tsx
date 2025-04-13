@@ -122,7 +122,7 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
       setglobalUserAuthorized(user)
     })
   }, [])
-  //RETURN TSX
+
   return (
     <div
       className="App"
@@ -170,9 +170,7 @@ function IndexPopupMain({ setglobalUserAuthorized }) {
       <div>{isLoading ? "Loading..." : ""}</div>
       <div>
         {" "}
-        {/* <button className="my-button">Get Current Tab URL</button> */}
-        {/* Below breaks code userAccessToken={userAccessToken}*/}
-        {/* <Content_leetcode /> */}
+
         <CreateThing isRendered={true} user={user} page={"page1"}></CreateThing>
       </div>
 
